@@ -37,22 +37,26 @@ public class ToppingController {
     }
 
     // Delete topping by id
-    @DeleteMapping("delete-topping/toppingId")
-    public ResponseEntity<?> deleteToppingById(@PathVariable("toppingId") Long toppingId){
-        toppingService.deleteToppingById(toppingId);
-        ApiResponseMessage toppingDeleted = ApiResponseMessage.builder()
-                .message("Topping Deleted Successfully")
-                .isSuccess(true)
-                .status(HttpStatus.OK)
-                .build();
-
-        return new ResponseEntity<>(toppingDeleted, HttpStatus.OK);
+    @DeleteMapping("/delete-topping/{toppingId}")
+    public ResponseEntity<Topping> deleteToppingById(@PathVariable("toppingId") Long toppingId){
+        return new ResponseEntity<>(toppingService.deleteToppingById(toppingId), HttpStatus.OK);
     }
 
     // Update Topping
-    @PatchMapping("/update-topping")
-    public ResponseEntity<Topping> updateTopping(@RequestBody Topping topping){
-        return ResponseEntity.ok(toppingService.updateTopping(topping));
+    @PutMapping("/update-topping")
+    public ResponseEntity<?> updateTopping(
+            @RequestParam("toppingId") Long id,
+            @RequestParam("toppingName") String name,
+            @RequestParam("toppingPrice") Double price
+
+    ){
+        Topping t = new Topping();
+        t.setToppingId(id);
+        t.setToppingName(name);
+        t.setToppingPrice(price);
+
+        return ResponseEntity.ok(toppingService.updateTopping(t));
+
     }
 
 }

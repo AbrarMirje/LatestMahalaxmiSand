@@ -11,7 +11,7 @@ public interface IToppingService {
 
     List<Topping> getAllToppings();
 
-    void deleteToppingById(Long toppingId);
+    Topping deleteToppingById(Long toppingId);
 
     Topping updateTopping(Topping topping);
 }

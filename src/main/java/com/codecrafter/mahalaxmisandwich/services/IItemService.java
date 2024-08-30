@@ -14,7 +14,7 @@ public interface IItemService {
 
     Item getItemById(Item item);
 
-    String deleteItem(Long itemId);
+    Item deleteItem(Long itemId);
 
     Item updateItem(Item item,MultipartFile file) throws IOException;
 }

@@ -39,8 +39,8 @@ public class ItemController {
         return ResponseEntity.ok(itemService.getItemById(item));
     }
 
-    @DeleteMapping("/delete-item/itemId")
-    private ResponseEntity<?> deleteItemById(@PathVariable("itemId") Long itemId){
+    @DeleteMapping("/delete-item/{itemId}")
+    private ResponseEntity<Item> deleteItemById(@PathVariable("itemId") Long itemId){
       return ResponseEntity.ok(itemService.deleteItem(itemId));
     }
 

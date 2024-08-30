@@ -20,7 +20,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                             .allowedHeaders("http://localhost:4200")
                             .allowedMethods(HttpMethod.GET.name(),
                                     HttpMethod.POST.name(),
-                                    HttpMethod.DELETE.name())
+                                    HttpMethod.DELETE.name(),
+                                    HttpMethod.PATCH.name(),
+                                    HttpMethod.PUT.name())
                             .allowedHeaders(HttpHeaders.CONTENT_TYPE,
                                     HttpHeaders.AUTHORIZATION);
                 }

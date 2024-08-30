@@ -17,10 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ItemServiceImpl implements IItemService {
@@ -77,11 +74,18 @@ public class ItemServiceImpl implements IItemService {
 
 
     @Override
-    public String deleteItem(Long itemId) {
-        itemRepository.deleteById(itemId);
+    public Item deleteItem(Long itemId) {
+        Optional<Item> itemOptional = itemRepository.findById(itemId);
 
-        return "Item deleted successfully..!";
+        if (itemOptional.isPresent()) {
+            Item item = itemOptional.get();
+            itemRepository.deleteById(itemId);
+            return item;
+        } else {
+            throw new RuntimeException("Item not found with id: " + itemId);
+        }
     }
+
 
     @Override
     public Item updateItem(Item item,MultipartFile file) throws IOException {
